@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eva — 50 ans 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #D4A853;
+  --cream: #FDF6E9;
+  --dark: #1A1008;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+html[lang="he"] body { font-family: 'Heebo', sans-serif; }
+
+/* ── LANGUAGE SWITCHER ─────────────────────── */
+.lang-switcher {
+  position: fixed; top: 14px; right: 16px;
+  z-index: 500; display: flex; gap: 6px;
+}
+html[dir="rtl"] .lang-switcher { right: auto; left: 16px; }
+.lang-btn {
+  background: rgba(255,255,255,0.9); border: 1.5px solid #E0CFA0;
+  border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 600;
+  cursor: pointer; color: var(--dark); transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif; backdrop-filter: blur(6px);
+}
+.lang-btn:hover, .lang-btn.active { background: var(--gold); border-color: var(--gold); }
+
+/* ── STEP INDICATOR ────────────────────────── */
+.step-dots {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 500;
+}
+.step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(26,16,8,0.2); transition: all 0.3s;
+  cursor: pointer;
+}
+.step-dot.active { background: var(--gold); transform: scale(1.4); }
+
+/* ── SECTIONS ──────────────────────────────── */
+.section {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 60px 24px 80px;
+  position: relative;
+}
+
+/* step 1 — dark bg */
+#step1 {
+  background: var(--dark);
+  color: var(--cream);
+}
+#step1::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(212,168,83,0.12) 0%, transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(212,168,83,0.07) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+/* step 2 — cream bg */
+#step2 { background: var(--cream); }
+#step2::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(212,168,83,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(242,196,178,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* step 3 — white bg */
+#step3 { background: white; }
+
+.section-inner {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 440px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* ── STEP 1 — INVITATION ───────────────────── */
+.step-num {
+  font-size: 11px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 32px; opacity: 0.8;
+}
+
+.badge {
+  display: inline-block; background: var(--gold); color: var(--dark);
+  font-weight: 500; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; padding: 6px 18px; border-radius: 50px; margin-bottom: 24px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(64px, 22vw, 96px); line-height: 0.85;
+  letter-spacing: -3px; text-align: center; margin-bottom: 8px;
+}
+html[lang="he"] .title { font-family: 'Heebo', sans-serif; letter-spacing: 0; line-height: 1; }
+.title .accent { color: var(--gold); font-style: italic; display: block; }
+html[lang="he"] .title .accent { font-style: normal; }
+
+.subtitle {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 19px; color: rgba(253,246,233,0.7); margin-bottom: 36px; text-align: center;
+}
+html[lang="he"] .subtitle { font-family: 'Heebo', sans-serif; font-style: normal; }
+
+.info-card {
+  width: 100%; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(212,168,83,0.3);
+  border-radius: 20px; padding: 24px; margin-bottom: 36px;
+}
+.info-card h2 {
+  font-family: 'Playfair Display', serif; font-size: 16px;
+  color: var(--gold); margin-bottom: 14px; letter-spacing: 1px;
+}
+html[lang="he"] .info-card h2 { font-family: 'Heebo', sans-serif; }
+.info-row {
+  display: flex; gap: 10px; align-items: flex-start;
+  margin-bottom: 10px; font-size: 14px; line-height: 1.5;
+  color: rgba(253,246,233,0.85);
+}
+.info-row:last-child { margin-bottom: 0; }
+.info-icon { font-size: 16px; flex-shrink: 0; }
+
+.next-btn {
+  background: var(--gold); color: var(--dark); border: none;
+  border-radius: 50px; padding: 16px 44px;
+  font-size: 16px; font-weight: 600; cursor: pointer;
+  letter-spacing: 0.5px; font-family: 'DM Sans', sans-serif;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 24px rgba(212,168,83,0.35);
+  display: flex; align-items: center; gap: 8px;
+}
+html[lang="he"] .next-btn { font-family: 'Heebo', sans-serif; }
+.next-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,168,83,0.5); }
+.next-btn:active { transform: translateY(0); }
+.next-btn .arrow { font-size: 18px; transition: transform 0.2s; }
+.next-btn:hover .arrow { transform: translateY(4px); }
+
+/* ── STEP 2 — ROULETTE ─────────────────────── */
+.step-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+}
+.roulette-title {
+  font-family: 'Playfair Display', serif; font-size: 28px;
+  font-weight: 900; text-align: center; margin-bottom: 8px; color: var(--dark);
+}
+html[lang="he"] .roulette-title { font-family: 'Heebo', sans-serif; }
+.roulette-sub {
+  font-size: 14px; color: #7A6040; text-align: center;
+  margin-bottom: 28px; line-height: 1.5;
+}
+
+.fun-text {
+  width: 100%; background: white; border: 2px solid var(--gold);
+  border-radius: 20px; padding: 20px; margin-bottom: 28px;
+  font-size: 14px; line-height: 1.7;
+}
+.fun-text p { margin-bottom: 8px; }
+.fun-text p:last-child { margin-bottom: 0; }
+.fun-text strong { color: var(--gold); }
+
+.wheel-wrapper {
+  position: relative; width: 260px; height: 260px; margin: 0 auto 20px;
+}
+#wheel { width: 260px; height: 260px; border-radius: 50%; box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+.wheel-pointer {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 11px solid transparent; border-right: 11px solid transparent;
+  border-top: 22px solid var(--dark); z-index: 10;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+.wheel-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 32px; height: 32px; background: var(--dark);
+  border-radius: 50%; border: 3px solid white; z-index: 10;
+}
+
+.spin-btn {
+  background: var(--gold); color: var(--dark); border: none;
+  border-radius: 50px; padding: 16px 44px;
+  font-size: 16px; font-weight: 600; cursor: pointer;
+  letter-spacing: 0.5px; font-family: 'DM Sans', sans-serif;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 24px rgba(212,168,83,0.35); margin-bottom: 0;
+}
+html[lang="he"] .spin-btn { font-family: 'Heebo', sans-serif; }
+.spin-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(212,168,83,0.5); }
+.spin-btn:active { transform: translateY(0); }
+.spin-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+/* ── STEP 3 — RSVP ─────────────────────────── */
+#step3 .section-inner { align-items: stretch; }
+
+.result-hero {
+  border-radius: 20px; padding: 28px 24px; text-align: center;
+  margin-bottom: 24px; transition: background 0.4s, color 0.4s;
+}
+.result-dot {
+  width: 72px; height: 72px; border-radius: 50%;
+  margin: 0 auto 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+.result-label {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  opacity: 0.7; margin-bottom: 6px;
+}
+.result-color-name {
+  font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; margin-bottom: 6px;
+}
+html[lang="he"] .result-color-name { font-family: 'Heebo', sans-serif; }
+.result-msg { font-size: 14px; line-height: 1.5; opacity: 0.85; }
+
+.rsvp-card {
+  background: var(--cream); border: 2px solid #E8D9B8;
+  border-radius: 20px; padding: 24px;
+}
+.rsvp-card h3 {
+  font-family: 'Playfair Display', serif; font-size: 18px;
+  margin-bottom: 16px; color: var(--dark);
+}
+html[lang="he"] .rsvp-card h3 { font-family: 'Heebo', sans-serif; }
+
+.rsvp-card input[type="text"] {
+  width: 100%; padding: 13px 16px; border: 2px solid #E8D9B8; border-radius: 12px;
+  font-size: 15px; background: white; color: var(--dark);
+  margin-bottom: 14px; outline: none; transition: border-color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+html[lang="he"] .rsvp-card input[type="text"] { font-family: 'Heebo', sans-serif; text-align: right; }
+.rsvp-card input[type="text"]:focus { border-color: var(--gold); }
+
+.guests-row {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+}
+.guests-row label { font-size: 14px; color: var(--dark); }
+.guests-ctrl { display: flex; align-items: center; gap: 8px; }
+.guests-ctrl button {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 2px solid var(--gold); background: white; color: var(--dark);
+  font-size: 20px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+}
+.guests-ctrl button:hover { background: var(--gold); }
+.guests-ctrl input[type="number"] {
+  width: 44px; text-align: center; border: 2px solid #E8D9B8;
+  border-radius: 8px; font-size: 16px; font-weight: 600; padding: 4px;
+  -moz-appearance: textfield;
+}
+.guests-ctrl input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.confirm-btn {
+  width: 100%; padding: 15px; background: var(--dark); color: var(--cream);
+  border: none; border-radius: 14px; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: opacity 0.15s; font-family: 'DM Sans', sans-serif;
+}
+html[lang="he"] .confirm-btn { font-family: 'Heebo', sans-serif; }
+.confirm-btn:hover { opacity: 0.82; }
+
+.confirm-success {
+  border-radius: 16px; padding: 20px; text-align: center;
+  font-size: 15px; line-height: 1.7; display: none;
+  animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+.respin-link {
+  display: block; text-align: center; margin-top: 16px;
+  font-size: 13px; color: #7A6040; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.respin-link:hover { color: var(--dark); }
+
+/* ── CONFETTI ───────────────────────────────── */
+.confetti-container {
+  position: fixed; top: 0; left: 0; right: 0; height: 100vh;
+  pointer-events: none; z-index: 400; overflow: hidden;
+}
+.confetti-piece { position: absolute; opacity: 0; animation: confettiFall linear forwards; }
+
+/* ── ANIMATIONS ─────────────────────────────── */
+.section-inner > * {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.section.visible .section-inner > * { opacity: 1; transform: translateY(0); }
+.section.visible .section-inner > *:nth-child(1) { transition-delay: 0.05s; }
+.section.visible .section-inner > *:nth-child(2) { transition-delay: 0.15s; }
+.section.visible .section-inner > *:nth-child(3) { transition-delay: 0.25s; }
+.section.visible .section-inner > *:nth-child(4) { transition-delay: 0.35s; }
+.section.visible .section-inner > *:nth-child(5) { transition-delay: 0.45s; }
+.section.visible .section-inner > *:nth-child(6) { transition-delay: 0.55s; }
+.section.visible .section-inner > *:nth-child(7) { transition-delay: 0.65s; }
+
+@keyframes popIn {
+  from { opacity:0; transform:scale(0.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes confettiFall {
+  0%   { opacity:1; transform:translateY(-10px) rotate(0deg); }
+  100% { opacity:0; transform:translateY(100vh) rotate(720deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- Lang switcher -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('he')">עב</button>
+</div>
+
+<!-- Step dots -->
+<div class="step-dots">
+  <div class="step-dot active" onclick="goToStep(0)"></div>
+  <div class="step-dot" onclick="goToStep(1)"></div>
+  <div class="step-dot" onclick="goToStep(2)"></div>
+</div>
+
+<!-- Confetti -->
+<div class="confetti-container" id="confettiContainer"></div>
+
+<!-- ── STEP 1 — INVITATION ── -->
+<section class="section" id="step1" data-step="0">
+  <div class="section-inner">
+    <div class="badge" data-i18n="badge"></div>
+    <div class="title">Eva<br><span class="accent" data-i18n="titleAccent"></span></div>
+    <div class="subtitle" data-i18n="subtitle"></div>
+    <div class="info-card">
+      <h2 data-i18n="infoTitle"></h2>
+      <div class="info-row"><span class="info-icon">📅</span><span data-i18n="infoDate"></span></div>
+      <div class="info-row"><span class="info-icon">🕗</span><span data-i18n="infoTime"></span></div>
+      <div class="info-row"><span class="info-icon">📍</span><span data-i18n="infoPlace"></span></div>
+      <div class="info-row"><span class="info-icon">📱</span><span data-i18n="infoRsvp"></span></div>
+    </div>
+    <button class="next-btn" onclick="goToStep(1)">
+      <span data-i18n="nextBtn1"></span>
+      <span class="arrow">↓</span>
+    </button>
+  </div>
+</section>
+
+<!-- ── STEP 2 — ROULETTE ── -->
+<section class="section" id="step2" data-step="1">
+  <div class="section-inner">
+    <div class="step-label" data-i18n="stepLabel2"></div>
+    <div class="roulette-title" data-i18n="rouletteTitle"></div>
+    <div class="roulette-sub" id="rouletteSub"></div>
+    <div class="fun-text" id="funText"></div>
+    <div class="wheel-wrapper">
+      <div class="wheel-pointer"></div>
+      <canvas id="wheel" width="260" height="260"></canvas>
+      <div class="wheel-center"></div>
+    </div>
+    <button class="spin-btn" id="spinBtn" onclick="spin()"></button>
+  </div>
+</section>
+
+<!-- ── STEP 3 — RSVP ── -->
+<section class="section" id="step3" data-step="2">
+  <div class="section-inner">
+    <div class="step-label" data-i18n="stepLabel3"></div>
+    <div class="result-hero" id="resultHero">
+      <div class="result-dot" id="resultDot"></div>
+      <div class="result-label" data-i18n="popupLabel"></div>
+      <div class="result-color-name" id="resultName"></div>
+      <div class="result-msg" id="resultMsg"></div>
+    </div>
+    <div class="rsvp-card">
+      <h3 data-i18n="rsvpTitle"></h3>
+      <div id="rsvpForm">
+        <input id="rsvpName" type="text" />
+        <div class="guests-row">
+          <label data-i18n="popupGuestsLabel"></label>
+          <div class="guests-ctrl">
+            <button type="button" onclick="changeGuests(-1)">−</button>
+            <input id="rsvpGuests" type="number" value="1" min="1" max="20" />
+            <button type="button" onclick="changeGuests(1)">+</button>
+          </div>
+        </div>
+        <button class="confirm-btn" onclick="confirmRsvp()" data-i18n="popupSubmit"></button>
+      </div>
+      <div class="confirm-success" id="confirmSuccess"></div>
+    </div>
+    <span class="respin-link" data-i18n="respinLink" onclick="goToStep(1)"></span>
+  </div>
+</section>
+
+<script>
+// ── TRANSLATIONS ──────────────────────────────────────────────
+const T = {
+  fr: {
+    badge:           "✨ Invitation spéciale ✨",
+    titleAccent:     "a 50 ans",
+    subtitle:        "et ça se fête comme il se doit",
+    infoTitle:       "Les détails qui comptent",
+    infoDate:        "<strong>Date :</strong> À confirmer",
+    infoTime:        "<strong>Heure :</strong> À confirmer",
+    infoPlace:       "<strong>Lieu :</strong> À confirmer",
+    infoRsvp:        "<strong>RSVP :</strong> Réponds à ce message",
+    nextBtn1:        "Découvrir ta couleur",
+    stepLabel2:      "Étape 2 — La roulette",
+    stepLabel3:      "Étape 3 — Confirmation",
+    rouletteTitle:   "🎡 La roulette des couleurs",
+    rouletteSub:     "Tourne la roue et découvre ta couleur du soir.<br>Pas de triche — le destin a toujours raison !",
+    funText:         `<p>Cinquante ans, c'est pas juste un anniversaire — c'est un <strong>chef-d'œuvre</strong> en cours d'élaboration. 🎨</p>
+                      <p><strong>Ta mission :</strong> fais tourner la roulette et viens habillé(e) dans la couleur du destin. Prépare-toi à briller ! ✨</p>`,
+    spinBtn:         "🎰 Tourner la roulette",
+    spinBtnAgain:    "🔄 Retourner",
+    popupLabel:      "Ta couleur est…",
+    rsvpTitle:       "Confirme ta présence",
+    popupGuestsLabel:"Nombre de personnes",
+    popupSubmit:     "✅ Je confirme ma présence",
+    respinLink:      "↑ Retourner la roulette",
+    confirmMsg: (name, guests, cname) =>
+      `🎉 Merci <strong>${name}</strong> ! Tu viens avec <strong>${guests === 1 ? '1 personne' : guests + ' personnes'}</strong>.<br>Ta couleur : <strong>${cname}</strong>. À bientôt ! 💛`,
+    rsvpNamePH:      "Ton prénom",
+    colors: [
+      { name: "Rouge Flashy",      msg: "Audacieux(se) et magnétique — tu vas mettre le feu à la piste ! 🔥" },
+      { name: "Orange Flamboyant", msg: "Chaleureux(se) et solaire, ton énergie va illuminer la soirée !" },
+      { name: "Jaune Néon",        msg: "Impossible de te rater — tu seras la star du dancefloor ✨" },
+      { name: "Vert Électrique",   msg: "Frais(che), fou/folle et irrésistible. On adore ton énergie !" },
+      { name: "Bleu Électrique",   msg: "Intense et vibrant(e) — tu vas faire danser la nuit entière 💙" },
+      { name: "Violet Néon",       msg: "Mystérieux(se) et envoûtant(e). La nuit est à toi ! 💜" },
+    ],
+  },
+  en: {
+    badge:           "✨ Special Invitation ✨",
+    titleAccent:     "turns 50",
+    subtitle:        "and it's going to be legendary",
+    infoTitle:       "The Important Details",
+    infoDate:        "<strong>Date:</strong> To be confirmed",
+    infoTime:        "<strong>Time:</strong> To be confirmed",
+    infoPlace:       "<strong>Venue:</strong> To be confirmed",
+    infoRsvp:        "<strong>RSVP:</strong> Reply to this message",
+    nextBtn1:        "Discover your colour",
+    stepLabel2:      "Step 2 — The Wheel",
+    stepLabel3:      "Step 3 — Confirmation",
+    rouletteTitle:   "🎡 The Colour Wheel",
+    rouletteSub:     "Spin the wheel and discover your colour for the evening.<br>No cheating — fate is always right!",
+    funText:         `<p>Fifty isn't just a birthday — it's a <strong>masterpiece</strong> in the making. 🎨</p>
+                      <p><strong>Your mission:</strong> spin the wheel and come dressed in the colour destiny picks for you. Get ready to shine! ✨</p>`,
+    spinBtn:         "🎰 Spin the wheel",
+    spinBtnAgain:    "🔄 Spin again",
+    popupLabel:      "Your colour is…",
+    rsvpTitle:       "Confirm your attendance",
+    popupGuestsLabel:"Number of guests",
+    popupSubmit:     "✅ Confirm my attendance",
+    respinLink:      "↑ Spin the wheel again",
+    confirmMsg: (name, guests, cname) =>
+      `🎉 Thank you <strong>${name}</strong>! Coming with <strong>${guests === 1 ? '1 person' : guests + ' people'}</strong>.<br>Your colour: <strong>${cname}</strong>. See you soon! 💛`,
+    rsvpNamePH:      "Your first name",
+    colors: [
+      { name: "Flashy Red",       msg: "Bold and magnetic — you're going to set the dance floor on fire! 🔥" },
+      { name: "Blazing Orange",   msg: "Warm and solar, your energy will light up the whole night!" },
+      { name: "Neon Yellow",      msg: "Impossible to miss — you'll be the undisputed star of the evening ✨" },
+      { name: "Electric Green",   msg: "Fresh, wild and irresistible. We love your energy!" },
+      { name: "Electric Blue",    msg: "Intense and vibrant — you'll keep the night dancing 💙" },
+      { name: "Neon Purple",      msg: "Mysterious and mesmerising. The night is yours! 💜" },
+    ],
+  },
+  he: {
+    badge:           "✨ הזמנה מיוחדת ✨",
+    titleAccent:     "בת 50",
+    subtitle:        "וזה חייב להיחגג כמו שצריך",
+    infoTitle:       "הפרטים החשובים",
+    infoDate:        "<strong>תאריך:</strong> יאושר בקרוב",
+    infoTime:        "<strong>שעה:</strong> יאושר בקרוב",
+    infoPlace:       "<strong>מקום:</strong> יאושר בקרוב",
+    infoRsvp:        "<strong>אישור הגעה:</strong> ענו על ההודעה הזו",
+    nextBtn1:        "גלה/י את הצבע שלך",
+    stepLabel2:      "שלב 2 — הגלגל",
+    stepLabel3:      "שלב 3 — אישור",
+    rouletteTitle:   "🎡 גלגל הצבעים",
+    rouletteSub:     "סובב את הגלגל וגלה את הצבע שלך לערב.<br>אין רמאות — לגורל תמיד יש צדק!",
+    funText:         `<p>חמישים זה לא סתם יום הולדת — זה <strong>יצירת מופת</strong> בתהליך. 🎨</p>
+                      <p><strong>המשימה שלך:</strong> סובב את הגלגל ובוא/י לבוש/ה בצבע שהגורל בחר עבורך. תתכוננו לזרוח! ✨</p>`,
+    spinBtn:         "🎰 סובב את הגלגל",
+    spinBtnAgain:    "🔄 סובב שוב",
+    popupLabel:      "הצבע שלך הוא…",
+    rsvpTitle:       "אשר/י הגעה",
+    popupGuestsLabel:"מספר אנשים",
+    popupSubmit:     "✅ אני מאשר/ת הגעה",
+    respinLink:      "↑ סובב שוב",
+    confirmMsg: (name, guests, cname) =>
+      `🎉 תודה <strong>${name}</strong>! את/ה מגיע/ה עם <strong>${guests === 1 ? 'אדם אחד' : guests + ' אנשים'}</strong>.<br>הצבע שלך: <strong>${cname}</strong>. נתראה! 💛`,
+    rsvpNamePH:      "השם שלך",
+    colors: [
+      { name: "אדום בוהק",   msg: "אמיץ/ה ומגנטי/ת — את/ה הולך/ת להצית את רחבת הריקודים! 🔥" },
+      { name: "כתום לוהט",   msg: "חמים/ה ושמשי/ת, האנרגיה שלך תאיר את כל הערב!" },
+      { name: "צהוב ניאון",  msg: "אי אפשר להתעלם ממך — תהיה/י כוכב/ת הערב ✨" },
+      { name: "ירוק חשמלי",  msg: "רענן/ה, פרוע/ה ובלתי נגד/ת. אנחנו אוהבים את האנרגיה שלך!" },
+      { name: "כחול חשמלי",  msg: "עז/ה ורוטט/ת — תשמור/י את הלילה רוקד! 💙" },
+      { name: "סגול ניאון",  msg: "מסתורי/ת ומכשפ/ת. הלילה שייך לך! 💜" },
+    ],
+  },
+};
+
+const COLOR_META = [
+  { hex: "#FF1744", text: "#fff" },
+  { hex: "#FF6D00", text: "#fff" },
+  { hex: "#FFD600", text: "#1A1008" },
+  { hex: "#00C853", text: "#fff" },
+  { hex: "#2979FF", text: "#fff" },
+  { hex: "#D500F9", text: "#fff" },
+];
+
+// ── STATE ──────────────────────────────────────────────────────
+let currentLang = 'fr';
+let spinCount = 0;
+let lastWinner = null;
+
+// ── LANG ───────────────────────────────────────────────────────
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  applyTranslations();
+  drawWheel(wheelRotation);
+  if (lastWinner !== null) updateResultHero(lastWinner);
+}
+
+function applyTranslations() {
+  const t = T[currentLang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.getElementById('funText').innerHTML = t.funText;
+  document.getElementById('rouletteSub').innerHTML = t.rouletteSub;
+  document.getElementById('rsvpName').placeholder = t.rsvpNamePH;
+  if (!spinning) {
+    document.getElementById('spinBtn').textContent = spinCount > 0 ? t.spinBtnAgain : t.spinBtn;
+  }
+}
+
+// ── SCROLL ─────────────────────────────────────────────────────
+const sections = ['step1','step2','step3'];
+
+function goToStep(idx) {
+  document.getElementById(sections[idx]).scrollIntoView({ behavior: 'smooth' });
+}
+
+// Update dots on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = sections.indexOf(e.target.id);
+      document.querySelectorAll('.step-dot').forEach((d,i) => d.classList.toggle('active', i === idx));
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.5 });
+
+sections.forEach(id => observer.observe(document.getElementById(id)));
+// Show first section immediately
+setTimeout(() => document.getElementById('step1').classList.add('visible'), 100);
+
+// ── AUDIO ──────────────────────────────────────────────────────
+let audioCtx = null;
+function getAC() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+function playTick(vol) {
+  const ac = getAC(), osc = ac.createOscillator(), g = ac.createGain();
+  osc.connect(g); g.connect(ac.destination); osc.type = 'triangle';
+  osc.frequency.setValueAtTime(800 + Math.random()*300, ac.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(350, ac.currentTime+0.05);
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime+0.07);
+  osc.start(ac.currentTime); osc.stop(ac.currentTime+0.08);
+}
+function playWin() {
+  const ac = getAC();
+  [523,659,784,1047].forEach((f,i) => {
+    const osc = ac.createOscillator(), g = ac.createGain();
+    osc.connect(g); g.connect(ac.destination); osc.type = 'sine';
+    const t = ac.currentTime + i*0.13;
+    osc.frequency.setValueAtTime(f,t);
+    g.gain.setValueAtTime(0.28,t);
+    g.gain.exponentialRampToValueAtTime(0.001,t+0.4);
+    osc.start(t); osc.stop(t+0.41);
+  });
+}
+
+// ── WHEEL ──────────────────────────────────────────────────────
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+const SIZE=260, CX=SIZE/2, CY=SIZE/2, R=SIZE/2-2;
+const N = COLOR_META.length;
+const SLICE = (2*Math.PI)/N;
+let wheelRotation = 0;
+let spinning = false;
+
+function drawWheel(rot) {
+  ctx.clearRect(0,0,SIZE,SIZE);
+  const labels = T[currentLang].colors.map(c => c.name.split(' ')[0]);
+  for (let i=0; i<N; i++) {
+    const a0 = rot - Math.PI/2 + i*SLICE;
+    const a1 = a0 + SLICE;
+    ctx.beginPath(); ctx.moveTo(CX,CY);
+    ctx.arc(CX,CY,R,a0,a1); ctx.closePath();
+    ctx.fillStyle = COLOR_META[i].hex; ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.6)'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.save();
+    ctx.translate(CX,CY); ctx.rotate(a0+SLICE/2);
+    ctx.textAlign='right'; ctx.fillStyle=COLOR_META[i].text;
+    ctx.font='bold 11px Heebo, DM Sans, sans-serif';
+    ctx.fillText(labels[i], R-12, 4);
+    ctx.restore();
+  }
+}
+drawWheel(0);
+
+// ── SPIN ───────────────────────────────────────────────────────
+function spin() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+
+  const winner = Math.floor(Math.random()*N);
+  // rot = -(winner·SLICE + SLICE/2) puts centre of slice at pointer
+  const rotFinal = -(winner*SLICE + SLICE/2);
+  const PI2 = 2*Math.PI;
+  const extra = 6 + Math.floor(Math.random()*4);
+  let delta = ((rotFinal - wheelRotation) % PI2 + PI2) % PI2;
+  if (delta < 0.02) delta = PI2;
+  const total = extra*PI2 + delta;
+
+  const startRot = wheelRotation;
+  const T0 = performance.now();
+  let prevRot = startRot;
+
+  function ease(p) { return 1 - Math.pow(1-p, 4); }
+  function frame(now) {
+    const p = Math.min((now-T0)/4500, 1);
+    const rot = startRot + total*ease(p);
+    drawWheel(rot);
+    const eN = Math.floor((rot    +Math.PI/2)/SLICE);
+    const eP = Math.floor((prevRot+Math.PI/2)/SLICE);
+    if (eN!==eP) playTick(0.12+(1-ease(p))*0.55);
+    prevRot = rot;
+    if (p<1) {
+      requestAnimationFrame(frame);
+    } else {
+      drawWheel(rotFinal);
+      wheelRotation = rotFinal;
+      spinning = false; spinCount++;
+      document.getElementById('spinBtn').disabled = false;
+      document.getElementById('spinBtn').textContent = T[currentLang].spinBtnAgain;
+      playWin();
+      launchConfetti(COLOR_META[winner].hex);
+      lastWinner = winner;
+      updateResultHero(winner);
+      // Reset RSVP form for new spin
+      document.getElementById('rsvpName').value = '';
+      document.getElementById('rsvpGuests').value = '1';
+      document.getElementById('rsvpForm').style.display = 'block';
+      document.getElementById('confirmSuccess').style.display = 'none';
+      // Scroll to step 3 after a short delay
+      setTimeout(() => goToStep(2), 600);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function updateResultHero(idx) {
+  const t = T[currentLang];
+  const meta = COLOR_META[idx];
+  const col  = t.colors[idx];
+  const hero = document.getElementById('resultHero');
+  hero.style.background = meta.hex;
+  hero.style.color = meta.text;
+  document.getElementById('resultDot').style.background = 'rgba(255,255,255,0.3)';
+  document.getElementById('resultDot').style.border = '3px solid rgba(255,255,255,0.6)';
+  document.getElementById('resultName').textContent = col.name;
+  document.getElementById('resultMsg').textContent  = col.msg;
+}
+
+// ── RSVP ───────────────────────────────────────────────────────
+function changeGuests(d) {
+  const el = document.getElementById('rsvpGuests');
+  el.value = Math.max(1, Math.min(20, (parseInt(el.value)||1)+d));
+}
+
+function confirmRsvp() {
+  const t = T[currentLang];
+  const name   = document.getElementById('rsvpName').value.trim();
+  const guests = parseInt(document.getElementById('rsvpGuests').value)||1;
+  if (!name || lastWinner === null) { document.getElementById('rsvpName').focus(); return; }
+  const cname = t.colors[lastWinner].name;
+  const hex   = COLOR_META[lastWinner].hex;
+  const ctext = COLOR_META[lastWinner].text;
+  const succ  = document.getElementById('confirmSuccess');
+  succ.style.background = hex;
+  succ.style.color = ctext;
+  succ.innerHTML = t.confirmMsg(name, guests, cname);
+  succ.style.display = 'block';
+  document.getElementById('rsvpForm').style.display = 'none';
+  launchConfetti(hex);
+
+  // Send to Google Sheets
+  fetch('https://script.google.com/macros/s/AKfycbzbeQvlJrzuBuYO7BKDAU99nAkTdisxx0NzEXbsyQxqgMowQQ3RqFBicxzode9VT_c/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      guests,
+      color: cname,
+      lang: currentLang
+    })
+  }).catch(() => {}); // silent fail — user experience not affected
+}
+
+// ── CONFETTI ───────────────────────────────────────────────────
+function launchConfetti(base) {
+  const c = document.getElementById('confettiContainer');
+  c.innerHTML = '';
+  const pal = [base,'#D4A853','#F2C4B2','#fff','#1A1008'];
+  for (let i=0; i<70; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const sz = 6+Math.random()*8;
+    el.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;
+      background:${pal[Math.floor(Math.random()*pal.length)]};
+      border-radius:${Math.random()>.5?'50%':'0'};
+      animation-duration:${2+Math.random()*2}s;
+      animation-delay:${Math.random()*1.2}s;`;
+    c.appendChild(el);
+  }
+  setTimeout(()=>c.innerHTML='',5000);
+}
+
+// ── INIT ───────────────────────────────────────────────────────
+applyTranslations();
+</script>
+</body>
+</html>
