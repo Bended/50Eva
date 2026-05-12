@@ -27,16 +27,20 @@ html[lang="he"] body { font-family: 'Heebo', sans-serif; }
 /* ── LANGUAGE SWITCHER ─────────────────────── */
 .lang-switcher {
   position: fixed; top: 14px; right: 16px;
-  z-index: 500; display: flex; gap: 6px;
+  z-index: 500;
 }
 html[dir="rtl"] .lang-switcher { right: auto; left: 16px; }
-.lang-btn {
-  background: rgba(255,255,255,0.9); border: 1.5px solid #E0CFA0;
-  border-radius: 20px; padding: 5px 12px; font-size: 12px; font-weight: 600;
-  cursor: pointer; color: var(--dark); transition: all 0.15s;
+.lang-switcher select {
+  background: rgba(255,255,255,0.92); border: 1.5px solid #E0CFA0;
+  border-radius: 20px; padding: 6px 14px; font-size: 14px; font-weight: 600;
+  cursor: pointer; color: var(--dark); outline: none;
   font-family: 'DM Sans', sans-serif; backdrop-filter: blur(6px);
+  transition: border-color 0.15s, background 0.15s; -webkit-appearance: none; appearance: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
-.lang-btn:hover, .lang-btn.active { background: var(--gold); border-color: var(--gold); }
+.lang-switcher select:hover, .lang-switcher select:focus {
+  border-color: var(--gold); background: #FFF8EC;
+}
 
 /* ── STEP INDICATOR ────────────────────────── */
 .step-dots {
@@ -323,9 +327,11 @@ html[lang="he"] .confirm-btn { font-family: 'Heebo', sans-serif; }
 
 <!-- Lang switcher -->
 <div class="lang-switcher">
-  <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-  <button class="lang-btn" onclick="setLang('en')">EN</button>
-  <button class="lang-btn" onclick="setLang('he')">עב</button>
+  <select id="langSelect" onchange="setLang(this.value)">
+    <option value="fr">🇫🇷 FR</option>
+    <option value="en">🇬🇧 EN</option>
+    <option value="he">🇮🇱 עב</option>
+  </select>
 </div>
 
 <!-- Step dots -->
@@ -412,9 +418,9 @@ const T = {
     titleAccent:     "a 50 ans",
     subtitle:        "et ça se fête comme il se doit",
     infoTitle:       "Les détails qui comptent",
-    infoDate:        "<strong>Date :</strong> À confirmer",
-    infoTime:        "<strong>Heure :</strong> À confirmer",
-    infoPlace:       "<strong>Lieu :</strong> À confirmer",
+    infoDate:        "<strong>Date :</strong> 18 Juin 2026",
+    infoTime:        "<strong>Heure :</strong> 19h00",
+    infoPlace:       "<strong>Lieu :</strong> <a href='https://maps.app.goo.gl/5SiwRh6K2z7UeYZx7' target='_blank' style='color:var(--gold)'>Mandelei Moher Sfarim 22, Herzliya</a>",
     infoRsvp:        "<strong>RSVP :</strong> Réponds à ce message",
     nextBtn1:        "Découvrir ta couleur",
     stepLabel2:      "Étape 2 — La roulette",
@@ -422,7 +428,7 @@ const T = {
     rouletteTitle:   "🎡 La roulette des couleurs",
     rouletteSub:     "Tourne la roue et découvre ta couleur du soir.<br>Pas de triche — le destin a toujours raison !",
     funText:         `<p>Cinquante ans, c'est pas juste un anniversaire — c'est un <strong>chef-d'œuvre</strong> en cours d'élaboration. 🎨</p>
-                      <p><strong>Ta mission :</strong> fais tourner la roulette et viens habillé(e) dans la couleur du destin. Prépare-toi à briller ! ✨</p>`,
+                      <p><strong>Votre Mission :</strong> Faites tourner la roulette, venez habillés dans la couleur de votre destin. On compte sur vous pour jouer le jeu. Préparez-vous à briller ! ✨</p>`,
     spinBtn:         "🎰 Tourner la roulette",
     spinBtnAgain:    "🔄 Retourner",
     popupLabel:      "Ta couleur est…",
@@ -439,7 +445,7 @@ const T = {
       { name: "Jaune Néon",        msg: "Impossible de te rater — tu seras la star du dancefloor ✨" },
       { name: "Vert Électrique",   msg: "Frais(che), fou/folle et irrésistible. On adore ton énergie !" },
       { name: "Bleu Électrique",   msg: "Intense et vibrant(e) — tu vas faire danser la nuit entière 💙" },
-      { name: "Violet Néon",       msg: "Mystérieux(se) et envoûtant(e). La nuit est à toi ! 💜" },
+      { name: "Rose Néon",          msg: "Pétillant(e) et irrésistible. Tu vas faire tourner les têtes ! 🌸" },
     ],
   },
   en: {
@@ -447,9 +453,9 @@ const T = {
     titleAccent:     "turns 50",
     subtitle:        "and it's going to be legendary",
     infoTitle:       "The Important Details",
-    infoDate:        "<strong>Date:</strong> To be confirmed",
-    infoTime:        "<strong>Time:</strong> To be confirmed",
-    infoPlace:       "<strong>Venue:</strong> To be confirmed",
+    infoDate:        "<strong>Date:</strong> 18 June 2026",
+    infoTime:        "<strong>Time:</strong> 7:00 PM",
+    infoPlace:       "<strong>Venue:</strong> <a href='https://maps.app.goo.gl/5SiwRh6K2z7UeYZx7' target='_blank' style='color:var(--gold)'>Mandelei Moher Sfarim 22, Herzliya</a>",
     infoRsvp:        "<strong>RSVP:</strong> Reply to this message",
     nextBtn1:        "Discover your colour",
     stepLabel2:      "Step 2 — The Wheel",
@@ -474,7 +480,7 @@ const T = {
       { name: "Neon Yellow",      msg: "Impossible to miss — you'll be the undisputed star of the evening ✨" },
       { name: "Electric Green",   msg: "Fresh, wild and irresistible. We love your energy!" },
       { name: "Electric Blue",    msg: "Intense and vibrant — you'll keep the night dancing 💙" },
-      { name: "Neon Purple",      msg: "Mysterious and mesmerising. The night is yours! 💜" },
+      { name: "Neon Pink",        msg: "Sparkling and irresistible. You're going to turn every head! 🌸" },
     ],
   },
   he: {
@@ -482,9 +488,9 @@ const T = {
     titleAccent:     "בת 50",
     subtitle:        "וזה חייב להיחגג כמו שצריך",
     infoTitle:       "הפרטים החשובים",
-    infoDate:        "<strong>תאריך:</strong> יאושר בקרוב",
-    infoTime:        "<strong>שעה:</strong> יאושר בקרוב",
-    infoPlace:       "<strong>מקום:</strong> יאושר בקרוב",
+    infoDate:        "<strong>תאריך:</strong> 18 יוני 2026",
+    infoTime:        "<strong>שעה:</strong> 19:00",
+    infoPlace:       "<strong>מקום:</strong> <a href='https://maps.app.goo.gl/5SiwRh6K2z7UeYZx7' target='_blank' style='color:var(--gold)'>מנדלי מוכר ספרים 22, הרצליה</a>",
     infoRsvp:        "<strong>אישור הגעה:</strong> ענו על ההודעה הזו",
     nextBtn1:        "גלה/י את הצבע שלך",
     stepLabel2:      "שלב 2 — הגלגל",
@@ -509,7 +515,7 @@ const T = {
       { name: "צהוב ניאון",  msg: "אי אפשר להתעלם ממך — תהיה/י כוכב/ת הערב ✨" },
       { name: "ירוק חשמלי",  msg: "רענן/ה, פרוע/ה ובלתי נגד/ת. אנחנו אוהבים את האנרגיה שלך!" },
       { name: "כחול חשמלי",  msg: "עז/ה ורוטט/ת — תשמור/י את הלילה רוקד! 💙" },
-      { name: "סגול ניאון",  msg: "מסתורי/ת ומכשפ/ת. הלילה שייך לך! 💜" },
+      { name: "ורוד ניאון",  msg: "נוצצ/ת ובלתי נגד/ת. כולם יסתכלו עליך! 🌸" },
     ],
   },
 };
@@ -520,7 +526,7 @@ const COLOR_META = [
   { hex: "#FFD600", text: "#1A1008" },
   { hex: "#00C853", text: "#fff" },
   { hex: "#2979FF", text: "#fff" },
-  { hex: "#D500F9", text: "#fff" },
+  { hex: "#FF4081", text: "#fff" },
 ];
 
 // ── STATE ──────────────────────────────────────────────────────
@@ -533,8 +539,7 @@ function setLang(lang) {
   currentLang = lang;
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.getElementById('langSelect').value = lang;
   applyTranslations();
   drawWheel(wheelRotation);
   if (lastWinner !== null) updateResultHero(lastWinner);
