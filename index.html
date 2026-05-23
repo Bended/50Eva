@@ -644,7 +644,8 @@ function spin() {
   spinning = true;
   document.getElementById('spinBtn').disabled = true;
 
-  const winner = Math.floor(Math.random()*N);
+  const allowed = [0,1,2,5];
+  const winner = allowed[Math.floor(Math.random()*allowed.length)];
   // rot = -(winner·SLICE + SLICE/2) puts centre of slice at pointer
   const rotFinal = -(winner*SLICE + SLICE/2);
   const PI2 = 2*Math.PI;
